@@ -21,7 +21,6 @@ build-vanilla:
 
 run-vanilla: build-vanilla
 	@echo
-	# Check app: curl localhost:HOST_PORT
 	docker run -p ${HOST_PORT}:${APP_PORT} -ti --rm --init node-${VANILLA}:${VERSION}
 
 build-multistage:
@@ -31,7 +30,6 @@ build-multistage:
 
 run-multistage: build-multistage
 	@echo
-	# Check app: curl localhost:HOST_PORT
 	docker run -p ${HOST_PORT}:${APP_PORT} -ti --rm --init node-${MULTISTAGE}:${VERSION}
 
 build-distroless:
@@ -41,7 +39,6 @@ build-distroless:
 
 run-distroless: build-distroless
 	@echo
-	# Check app: curl localhost:HOST_PORT
 	docker run -p ${HOST_PORT}:${APP_PORT} -ti --rm --init node-${DISTROLESS}:${VERSION}
 
 build-alpine:
@@ -51,10 +48,13 @@ build-alpine:
 
 run-alpine: build-alpine
 	@echo
-	# Check app: curl localhost:HOST_PORT
 	docker run -p ${HOST_PORT}:${APP_PORT} -ti --rm --init node-${ALPINE}:${VERSION}
+
+test-app:
+	curl localhost:${HOST_PORT}
+	@echo;
 
 all: build-vanilla build-multistage build-distroless build-alpine
 	@echo
-	@echo "All images built: vanilla, multistage, distroless, alpine"
+	@echo ">>> All images built: vanilla, multistage, distroless, alpine";echo
 	docker image ls -f "reference=node-*"
