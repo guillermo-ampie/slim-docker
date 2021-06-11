@@ -58,3 +58,8 @@ all: build-vanilla build-multistage build-distroless build-alpine
 	@echo
 	@echo ">>> All images built: vanilla, multistage, distroless, alpine";echo
 	docker image ls -f "reference=node-*"
+
+clean:
+	-rm -r ./app/node_modules
+	-docker image rm node-vanilla:${VERSION} node-multistage:${VERSION} \
+	node-distroless:${VERSION} node-alpine:${VERSION}
