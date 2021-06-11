@@ -54,6 +54,7 @@ run-alpine: build-alpine
 	# Check app: curl localhost:HOST_PORT
 	docker run -p ${HOST_PORT}:${APP_PORT} -ti --rm --init node-${ALPINE}:${VERSION}
 
-build-all: build-vanilla build-multistage build-distroless build-alpine
+all: build-vanilla build-multistage build-distroless build-alpine
 	@echo
 	@echo "All images built: vanilla, multistage, distroless, alpine"
+	docker image ls -f "reference=node-*"
